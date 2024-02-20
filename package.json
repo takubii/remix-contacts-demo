@@ -1,15 +1,4 @@
 {
-  "name": "remix-contacts-demo",
-  "private": true,
-  "sideEffects": false,
-  "type": "module",
-  "scripts": {
-    "build": "remix build",
-    "dev": "remix dev --manual",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "start": "remix-serve ./build/index.js",
-    "typecheck": "tsc"
-  },
   "dependencies": {
     "@remix-run/css-bundle": "^2.6.0",
     "@remix-run/node": "^2.6.0",
@@ -34,5 +23,15 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "name": "remix-contacts-demo",
+  "private": true,
+  "scripts": {
+    "build": "remix build",
+    "dev": "remix dev --manual",
+    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "start": "remix-serve ./build/index.js",
+    "typecheck": "tsc"
+  },
+  "sideEffects": false
 }
