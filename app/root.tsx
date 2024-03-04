@@ -11,6 +11,7 @@ import {
   useLoaderData,
   useNavigation,
 } from '@remix-run/react';
+import { useEffect } from 'react';
 import appStylesHref from './app.css';
 import { createEmptyContact, getContacts } from './data';
 
@@ -20,7 +21,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const q = url.searchParams.get('q');
   const contacts = await getContacts(q);
-  return json({ contacts });
+  return json({ contacts, q });
 };
 
 export const action = async () => {
@@ -29,8 +30,15 @@ export const action = async () => {
 };
 
 export default function App() {
-  const { contacts } = useLoaderData<typeof loader>();
+  const { contacts, q } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const searchField = document.getElementById('q');
+    if (searchField instanceof HTMLInputElement) {
+      searchField.value = q || '';
+    }
+  }, [q]);
 
   return (
     <html lang='en'>
@@ -48,6 +56,7 @@ export default function App() {
               <input
                 id='q'
                 aria-label='Search contacts'
+                defaultValue={q || ''}
                 placeholder='Search'
                 type='search'
                 name='q'
